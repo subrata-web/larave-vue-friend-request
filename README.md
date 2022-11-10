@@ -1,5 +1,12 @@
 # Steps
 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=database name
+DB_USERNAME=root
+DB_PASSWORD=
+
 1. composer install
 2. php artisan migrate
 3. php artisan db:seed
