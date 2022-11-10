@@ -41,29 +41,7 @@ const router = new VueRouter({
 const loginToken = window.localStorage.getItem("logintoken") || "";
 const isAuthenticated = loginToken ? true : false;
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (isAuthenticated) {
-            next();
-            return;
-        }
-        next("/login");
-    } else {
-        next();
-    }
-});
-
-router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.guest)) {
-        if (isAuthenticated) {
-            next("/friends");
-            return;
-        }
-        next();
-    } else {
-        next();
-    }
-});
+// setting auth middleware
 
 new Vue({
     el: '#app',

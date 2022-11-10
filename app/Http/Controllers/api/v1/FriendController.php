@@ -122,15 +122,17 @@ class FriendController extends BaseController {
     }
 
     /**
-     * get list of users/friends, wheather the user or frind is my network or not. to send the friend request
+     * get list of users/friends, wheather the user/friend is my network or not. to send the friend request
      * @param null
+     * @param Request
      * @return array|json
      */
-    public function getList()
+    public function getList(Request $request)
     {
         try {
+            $name = $request->has('name') ? $request->get('name') : null;
             $id = auth()->check() ? auth()->user()->id : null;
-            $list = $this->friendService->getAllFriends($id);
+            $list = $this->friendService->getAllFriends($id, $name);
             return $this->responseJson(false, $list['msg'], null, $list['payload']);
         } catch (\Exception $ex) {
             $message = $ex->getMessage();

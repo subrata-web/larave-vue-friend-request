@@ -81,11 +81,14 @@ class FriendService {
         ];
     }
 
-    public function getAllFriends($id = null)
+    public function getAllFriends($id = null, $name = null)
     {
         $query = $this->userModel->query();
         if ($id) {
             $query->where('id', '!=', $id);
+        }
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
         }
         $results = $query->orderBy('name', 'ASC')->get()->toArray();
         return ['msg' => 'Success.', 'payload' => $results];

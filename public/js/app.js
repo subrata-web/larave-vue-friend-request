@@ -2535,32 +2535,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
 });
 var loginToken = window.localStorage.getItem("logintoken") || "";
 var isAuthenticated = loginToken ? true : false;
-router.beforeEach(function (to, from, next) {
-  if (to.matched.some(function (record) {
-    return record.meta.requiresAuth;
-  })) {
-    if (isAuthenticated) {
-      next();
-      return;
-    }
-    next("/login");
-  } else {
-    next();
-  }
-});
-router.beforeEach(function (to, from, next) {
-  if (to.matched.some(function (record) {
-    return record.meta.guest;
-  })) {
-    if (isAuthenticated) {
-      next("/friends");
-      return;
-    }
-    next();
-  } else {
-    next();
-  }
-});
+
+// setting auth middleware
+
 new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
   el: '#app',
   router: router,
@@ -2588,14 +2565,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [{
   path: '/friends',
-  name: _components_FriendComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+  name: 'Friends',
   component: _components_FriendComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
   path: '/login',
-  name: _components_LoginComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+  name: 'Login',
   component: _components_LoginComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
   meta: {
     guest: true

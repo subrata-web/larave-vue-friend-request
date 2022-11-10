@@ -3,13 +3,13 @@ import Login from './components/LoginComponent';
 
 export const routes = [{
         path: '/friends',
-        name: Friends,
+        name: 'Friends',
         component: Friends,
         meta: { requiresAuth: true }
     },
     {
         path: '/login',
-        name: Login,
+        name: 'Login',
         component: Login,
         meta: { guest: true }
     }
