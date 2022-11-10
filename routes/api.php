@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::post('/', 'store')->name('store');
                 Route::post('/remove', 'removeFriend')->name('remove');
                 Route::post('/request', 'requestAC')->name('request');
+                Route::get('/all', 'getList')->name('all');
             });
         });
     });

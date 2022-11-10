@@ -16,6 +16,12 @@ class AuthController extends BaseController {
         $this->authService = $authService;
     }
 
+    /**
+     * user login
+     * @param string $email
+     * @param string $password
+     * @return array|json
+     */
     public function signin(Request $request)
     {
         try {
@@ -41,6 +47,14 @@ class AuthController extends BaseController {
         }
     }
 
+    /**
+     * register/sign up a new user
+     * @param string $email
+     * @param string $name
+     * @param string $password
+     * @param string confirm_password
+     * @return array|json
+     */
     public function signup(Request $request)
     {
         try {
@@ -72,6 +86,11 @@ class AuthController extends BaseController {
         }
     }
 
+    /**
+     * logout user to reset auth token
+     * @param null
+     * @return array|json
+     */
     public function logout()
     {
         auth()->user()->tokens()->delete();

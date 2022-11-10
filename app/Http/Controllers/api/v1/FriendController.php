@@ -16,6 +16,11 @@ class FriendController extends BaseController {
         $this->friendService = $friendService;
     }
 
+    /**
+     * get list of friends of my friend list and my friend list depends on params
+     * @param int $id
+     * @return array|json
+     */
     public function showFriends(Request $request)
     {
         try {
@@ -31,6 +36,11 @@ class FriendController extends BaseController {
         }
     }
 
+    /**
+     * add friend/friend request
+     * @param int friend_id
+     * @return array|json
+     */
     public function store(Request $request)
     {
         try {
@@ -56,6 +66,11 @@ class FriendController extends BaseController {
         }
     }
 
+    /**
+     * remove friend from my network
+     * @param int friend_id
+     * @return array|json
+     */
     public function removeFriend(Request $request)
     {
         try {
@@ -80,6 +95,11 @@ class FriendController extends BaseController {
         }
     }
 
+    /**
+     * friend request accept or delete friend request
+     * @param int friend_id
+     * @return array|json
+     */
     public function requestAC(Request $request)
     {
         try {
@@ -92,6 +112,26 @@ class FriendController extends BaseController {
             }
             $req = $this->friendService->requestFriend($request->user_id, $request->accept);
             return $this->responseJson(false, $req['msg']);
+        } catch (\Exception $ex) {
+            $message = $ex->getMessage();
+            if (env('APP_ENV') === "production") {
+                $message = 'Something went wrong.';
+            }
+            return $this->responseJson(true, $message);
+        }
+    }
+
+    /**
+     * get list of users/friends, wheather the user or frind is my network or not. to send the friend request
+     * @param null
+     * @return array|json
+     */
+    public function getList()
+    {
+        try {
+            $id = auth()->check() ? auth()->user()->id : null;
+            $list = $this->friendService->getAllFriends($id);
+            return $this->responseJson(false, $list['msg'], null, $list['payload']);
         } catch (\Exception $ex) {
             $message = $ex->getMessage();
             if (env('APP_ENV') === "production") {

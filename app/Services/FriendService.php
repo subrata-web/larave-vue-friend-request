@@ -80,4 +80,14 @@ class FriendService {
             'msg' => "Not found"
         ];
     }
+
+    public function getAllFriends($id = null)
+    {
+        $query = $this->userModel->query();
+        if ($id) {
+            $query->where('id', '!=', $id);
+        }
+        $results = $query->orderBy('name', 'ASC')->get()->toArray();
+        return ['msg' => 'Success.', 'payload' => $results];
+    }
 }
