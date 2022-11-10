@@ -16,7 +16,7 @@ import App from './app.vue';
 import { routes } from './routes';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+axios.defaults.baseURL = process.env.MIX_VUE_APP_ROOT_DEV_API;
 
 Vue.config.productionTip = false;
 
